@@ -18,11 +18,13 @@ public class Solver {
     private boolean placeNextDomino(int index) {
         if (index >= dominoes.size()) {
             return true;
+
         }
     
         Domino domino = dominoes.get(index);
         if (domino.isUsed()) {
             return placeNextDomino(index + 1);
+
         }
     
         for (int row = 0; row < board.rows; row++) {
@@ -37,6 +39,7 @@ public class Solver {
                         board.placeDominoWithValues(domino, left, right, row, col, horizontal);
                         if (placeNextDomino(index + 1)) return true;
                         board.removeDomino(domino, row, col, horizontal);
+
                     }
     
                     // Flipped order (180-degree flip)
@@ -44,11 +47,13 @@ public class Solver {
                         board.placeDominoWithValues(domino, right, left, row, col, horizontal);
                         if (placeNextDomino(index + 1)) return true;
                         board.removeDomino(domino, row, col, horizontal);
+
                     }
                 }
             }
         }
     
         return false;
+        
     }
 }

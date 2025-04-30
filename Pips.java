@@ -12,40 +12,47 @@ public class Pips {
         */
 
         // Set cells as allowed or disallowed
-        board.setCell(0, 0, false);
+        board.setCell(0, 0, true);
         board.setCell(0, 1, true);
         board.setCell(0, 2, true);
 
-        board.setCell(1, 0, false);
-        board.setCell(1, 1, true);
+        board.setCell(1, 0, true);
+        board.setCell(1, 1, false);
         board.setCell(1, 2, true);
 
         board.setCell(2, 0, true);
         board.setCell(2, 1, true);
-        board.setCell(2, 2, false);
+        board.setCell(2, 2, true);
 
         // Add Groups
-        Group purple = new Group(Group.Type.EQUAL_TO, 0);
-        purple.addCell(2, 0);
-        board.addGroup(purple);
+        Group purple1 = new Group(Group.Type.LESS_THAN, 5);
+        purple1.addCell(0, 0);
+        purple1.addCell(0, 1);
+        board.addGroup(purple1);
 
-        Group pink = new Group(Group.Type.EQUAL, null);
-        pink.addCell(1, 1);
-        pink.addCell(2, 1);
-        board.addGroup(pink);
+        Group pink1 = new Group(Group.Type.SUM_EQUAL_TO, 5);
+        pink1.addCell(0, 2);
+        pink1.addCell(1, 2);
+        pink1.addCell(2, 1);
+        pink1.addCell(2, 2);
+        board.addGroup(pink1);
 
-        Group teal = new Group(Group.Type.SUM_EQUAL_TO, 10);
-        teal.addCell(0, 2);
-        teal.addCell(1, 2);
+        Group teal = new Group(Group.Type.SUM_EQUAL_TO, 6);
+        teal.addCell(1, 0);
+        teal.addCell(2, 0);
         board.addGroup(teal);
 
        // Dominoes as provided in game
        List<Domino> dominoes = List.of(
-            new Domino(5, 5),
-            new Domino(0, 2),
-            new Domino(2, 3)
+            new Domino(2, 3),
+            new Domino(5, 0),
+            new Domino(4, 1),
+            new Domino(0, 0)    
 
         );
+
+        System.out.println("Beginning solve on board:");
+        board.print();
 
         // Solve
         Solver solver = new Solver(board, dominoes);
